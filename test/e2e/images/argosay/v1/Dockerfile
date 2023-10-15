@@ -1,4 +1,4 @@
-FROM ubuntu:mantic-20230807.1
+FROM ubuntu:mantic-20230807.1@sha256:4ece736cc64e12426819d31e82f17f81555148adc3093474908ca1df00222d62
 
 RUN apt-get update && \
     apt-get install -y apt-utils ca-certificates apt-transport-https cowsay --no-install-recommends && \

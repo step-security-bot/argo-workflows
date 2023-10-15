@@ -3,7 +3,7 @@ ARG GIT_COMMIT=unknown
 ARG GIT_TAG=unknown
 ARG GIT_TREE_STATE=unknown
 
-FROM golang:1.21-alpine3.18 as builder
+FROM golang:1.21-alpine3.18@sha256:926f7f7e1ab8509b4e91d5ec6d5916ebb45155b0c8920291ba9f361d65385806 as builder
 
 RUN apk update && apk add --no-cache \
     git \
@@ -24,7 +24,7 @@ COPY . .
 
 ####################################################################################################
 
-FROM node:20-alpine as argo-ui
+FROM node:20-alpine@sha256:37750e51d61bef92165b2e29a77da4277ba0777258446b7a9c99511f119db096 as argo-ui
 
 RUN apk update && apk add --no-cache git
 
