@@ -20,9 +20,14 @@ jobs:
     env:
       SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
     steps:
-      - uses: actions/checkout@v4
+      - name: Harden Runner
+        uses: step-security/harden-runner@1b05615854632b887b69ae1be8cbefe72d3ae423 # v2.6.0
+        with:
+          egress-policy: audit
+
+      - uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 # v4.1.0
       - name: Run Snyk to check for Go vulnerabilities
-        uses: snyk/actions/golang@master
+        uses: snyk/actions/golang@39091e69b560da335383b404e50d65b408f4f812 # master
         with:
           args: --severity-threshold=high
 
@@ -33,15 +38,20 @@ jobs:
     env:
       SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v3
+      - name: Harden Runner
+        uses: step-security/harden-runner@1b05615854632b887b69ae1be8cbefe72d3ae423 # v2.6.0
+        with:
+          egress-policy: audit
+
+      - uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 # v4.1.0
+      - uses: actions/setup-node@5e21ff4d9bc1a8cf6de233a3057d20ec6b3fb69d # v3.8.1
         with:
           node-version: "20" # change in all GH Workflows
           cache: yarn
           cache-dependency-path: ui/yarn.lock
       - run: yarn --cwd ui install
       - name: Run Snyk to check for Node vulnerabilities
-        uses: snyk/actions/node@master
+        uses: snyk/actions/node@39091e69b560da335383b404e50d65b408f4f812 # master
         with:
           args: --file=ui/package.json --severity-threshold=high
 

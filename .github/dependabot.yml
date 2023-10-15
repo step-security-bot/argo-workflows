@@ -28,3 +28,33 @@ updates:
       - dependency-name: react-router-dom
       - dependency-name: "@types/react-router-dom"
     open-pull-requests-limit: 10
+
+  - package-ecosystem: docker
+    directory: /
+    schedule:
+      interval: daily
+
+  - package-ecosystem: npm
+    directory: /dev/nix
+    schedule:
+      interval: daily
+
+  - package-ecosystem: pip
+    directory: /sdks/python/client
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /test/e2e/images/argosay/v1
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /test/e2e/images/argosay/v2
+    schedule:
+      interval: daily
+
+  - package-ecosystem: maven
+    directory: /sdks/java/tests
+    schedule:
+      interval: daily
